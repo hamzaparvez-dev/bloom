@@ -1,0 +1,16 @@
+export const Colors = {
+  pink: '#E8608C',
+  pinkLight: '#FCEDEA',
+  pinkSurface: '#FCEDF4',
+  bg: '#FFF4F7',
+  bgDeep: '#F7E2ED',
+  white: '#FFFFFF',
+  dark: '#190F2D',
+  muted: '#5B5470',
+  border: '#EDE8F4',
+  purple: '#DDD1FC',
+  purpleBg: '#EFEAFF',
+  greenBg: '#EAFFE2',
+  orangeBg: '#FCEACC',
+  transparent: 'transparent',
+} as const;

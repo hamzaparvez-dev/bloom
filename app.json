@@ -2,6 +2,7 @@
   "expo": {
     "name": "bloom",
     "slug": "bloom",
+    "scheme": "bloom",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,9 +14,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bloom.pregnancytracker"
     },
     "android": {
+      "package": "com.bloom.pregnancytracker",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +28,19 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-dev-client",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Bloom uses your photo library for community posts and optional thermometer photos for BBT logging.",
+          "cameraPermission": "Bloom can use the camera for community posts and to photograph your thermometer when you log BBT."
+        }
+      ],
+      "expo-web-browser",
+      "@react-native-community/datetimepicker",
+      "expo-notifications"
+    ]
   }
 }

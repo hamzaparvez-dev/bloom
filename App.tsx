@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
+import { RootNavigator } from './app/navigation/RootNavigator';
+import { AuthProvider } from './app/providers/AuthProvider';
+import { RevenueCatProvider } from './app/providers/RevenueCatProvider';
+import { SupabaseOAuthLinkHandler } from './app/components/system/SupabaseOAuthLinkHandler';
+import { shouldSkipExpoNotifications } from './app/lib/expo-go-notifications';
+
+if (!shouldSkipExpoNotifications()) {
+  void import('expo-notifications').then((Notifications) => {
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowBanner: true,
+        shouldShowList: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+      }),
+    });
+  });
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView style={styles.root}>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <RevenueCatProvider>
+            <SupabaseOAuthLinkHandler />
+            <NavigationContainer>
+              <RootNavigator />
+            </NavigationContainer>
+          </RevenueCatProvider>
+        </AuthProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
